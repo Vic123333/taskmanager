@@ -1,7 +1,79 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Hello World!</h1>
+{% if user.is_authenticated %}
+<div class="col-md-6 offset-md-3">
 
+<h1 id="current_task_text">Current Tasks</h1>
+<style>
+    #current_task_text {
+        text-align: center;
+        color: white;
+    }
+</style>
+
+<br>
+<br>
+
+<table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Task</th>
+        <th scope="col">Date</th>
+        <th scope="col">Priority</th>
+      </tr>
+    </thead>
+    //hier die asap Logik einbauen, model einbauen und migrieren. funktion für das hinzufügen, löschen 
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+</div>
+{% else %}
+
+<h1 style="font-size: 40px; color: white">Login</h1>
+
+<br>
+
+<div class="col-md-6 offset-md-3">
+
+
+<style>
+    h1 {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<br>
+
+<form method="POST" action="{% url 'home' %}">
+    {% csrf_token %}
+    <br>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" required>
+        <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" required>
+        <label for="floatingPassword">Password</label>
+        <br>
+        <button type="submit" class="btn btn-secondary">Login</button>
+    </div>
+</form>
+
+</div>
+
+
+{% endif %}
 
 {% endblock %}
